@@ -10,17 +10,16 @@ using System.Web.Mvc;
 
 namespace Projeto01.Controllers
 {
-    public class CategoriasController : Controller
+    public class FabricantesController : Controller
     {
         private EFContext context = new EFContext();
 
-        // GET: Categorias
+        // GET: Fabricantes
         public ActionResult Index()
         {
-            return View(context.Categorias);
+            return View(context.Fabricantes.OrderBy(f => f.Nome));
         }
 
-        // GET: Create
         public ActionResult Create()
         {
             return View();
@@ -28,9 +27,9 @@ namespace Projeto01.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Categoria categoria)
+        public ActionResult Create(Fabricante fabricante)
         {
-            context.Categorias.Add(categoria);
+            context.Fabricantes.Add(fabricante);
             context.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -40,26 +39,25 @@ namespace Projeto01.Controllers
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            Categoria categoria = context.Categorias.Find(id);
+            Fabricante fabricante = context.Fabricantes.Find(id);
 
-            if (categoria == null)
+            if (fabricante == null)
                 return HttpNotFound();
 
-            return View(categoria);
+            return View(fabricante);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Categoria categoria)
+        public ActionResult Edit(Fabricante fabricante)
         {
             if (ModelState.IsValid)
             {
-                context.Entry(categoria).State = EntityState.Modified;
+                context.Entry(fabricante).State = EntityState.Modified;
                 context.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            return View(categoria);
+            return View(fabricante);
         }
 
         public ActionResult Details(long? id)
@@ -67,12 +65,12 @@ namespace Projeto01.Controllers
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            Categoria categoria = context.Categorias.Find(id);
+            Fabricante fabricante = context.Fabricantes.Find(id);
 
-            if (categoria == null)
+            if (fabricante == null)
                 return HttpNotFound();
 
-            return View(categoria);
+            return View(fabricante);
         }
 
         public ActionResult Delete(long? id)
@@ -80,20 +78,20 @@ namespace Projeto01.Controllers
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            Categoria categoria = context.Categorias.Find(id);
+            Fabricante fabricante = context.Fabricantes.Find(id);
 
-            if (categoria == null)
+            if (fabricante == null)
                 return HttpNotFound();
 
-            return View(categoria);
+            return View(fabricante);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(long id)
         {
-            Categoria categoria = context.Categorias.Find(id);
-            context.Categorias.Remove(categoria);
+            Fabricante fabricante = context.Fabricantes.Find(id);
+            context.Fabricantes.Remove(fabricante);
             context.SaveChanges();
             return RedirectToAction("Index");
         }
