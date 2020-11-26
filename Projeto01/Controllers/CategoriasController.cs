@@ -95,6 +95,7 @@ namespace Projeto01.Controllers
             Categoria categoria = context.Categorias.Find(id);
             context.Categorias.Remove(categoria);
             context.SaveChanges();
+            TempData["msg"] = $"Categoria {categoria.Nome.ToUpper()} excluída!";
             return RedirectToAction("Index");
         }
     }
