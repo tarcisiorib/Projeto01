@@ -11,17 +11,18 @@
     <div class="container">
         <div class="row">
             <div class="page-header bg-danger">
-                <h1>
-                    Desenvolvimento em ASP.NET MVC 5<small class="text-danger">Utilizando o Bootstrap</small>
+                <h1 style="text-align:center">
+                    Desenvolvimento em ASP.NET MVC 5
                 </h1>                
             </div>
         </div>
         <div class="row">
             <div class="col-xs-3 col-md-3 bg-success">
                 <ul class="nav nav-pills nav-stacked">
-                    <li id="home" role="presentation" class="active"><a href="#">Home</a></li>
+                    <li id="home" role="presentation"><a href="#">Home</a></li>
                     <li id="categorias" role="presentation">@Html.ActionLink("Categorias", "Index", "Categorias")</li>
                     <li id="fabricantes" role="presentation">@Html.ActionLink("Fabricantes", "Index", "Fabricantes")</li>
+                    <li id="produtos" role="presentation">@Html.ActionLink("Produtos", "Index", "Produtos")</li>
                 </ul>
             </div>
             <div class="col-xs-9 col-md-9">

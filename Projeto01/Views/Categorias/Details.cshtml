@@ -26,3 +26,12 @@
         @Html.ActionLink("Cancelar", "Index", null, new { id = Model.CategoriaId }, new { @class = "btn btn-danger" })
     </div>
 </div>
+
+@section ScriptPage {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('li').removeClass("active");
+            $('#categorias').addClass("active");
+        });
+    </script>
+}

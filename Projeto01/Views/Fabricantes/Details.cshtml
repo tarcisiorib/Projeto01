@@ -26,3 +26,14 @@
         @Html.ActionLink("Cancelar", "Index", null, new { id = Model.FabricanteId }, new { @class = "btn btn-danger" })
     </div>
 </div>
+
+@Html.Partial("~/Views/Produtos/_PorFabricante.cshtml", Model.Produtos.ToList())
+
+@section ScriptPage {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('li').removeClass("active");
+            $('#fabricantes').addClass("active");
+        });
+    </script>
+}
