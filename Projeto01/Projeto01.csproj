@@ -368,6 +368,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CategoriasController.cs" />
     <Compile Include="Controllers\FabricantesController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProdutosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -396,6 +397,7 @@
     <Content Include="Views\Produtos\Delete.cshtml" />
     <Content Include="Views\Produtos\_PorFabricante.cshtml" />
     <Content Include="Views\Produtos\_PartialDetailsContentPanel.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
