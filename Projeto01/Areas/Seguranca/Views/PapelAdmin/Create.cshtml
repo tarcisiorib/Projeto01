@@ -1,0 +1,36 @@
+﻿@model string
+
+@{
+    ViewBag.Title = "Adicionar papel";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            PAPEL
+        </div>
+        <div class="panel-body">
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <label>Nome</label>
+                        <input name="nome" value="@Model" class="form-control" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer panel-info">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Salvar" class="btn btn-success" />
+                @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-danger" })
+            </div>
+            <br />
+            <br />
+        </div>
+    </div>
+}
+

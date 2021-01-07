@@ -1,7 +1,7 @@
 ﻿@model Modelo.Cadastros.Produto
 
 @{
-    ViewBag.Title = "NOVO PRODUTO";
+    ViewBag.Title = "ALTERAR PRODUTO";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -14,12 +14,12 @@
             PRODUTO
         </div>
         <div class="panel-body">
-            @Html.Partial("~/Views/Produtos/_PartialEditContentPanel.cshtml", Model)
+            @Html.Partial("~/Areas/Cadastros/Views/Produtos/_PartialEditContentPanel.cshtml", Model)
         </div>
         <div class="panel-footer panel-info">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Salvar" class="btn btn-success" />
-                @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-danger"})
+                @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-danger" })
             </div>
             <br />
             <br />
@@ -37,7 +37,7 @@
         $(document).ready(function () {
             $('li').removeClass("active");
             $('#produtos').addClass("active");
-            $('#datepicker').datepicker();
+            //$('#datepicker').datepicker();
         });
     </script>
 }

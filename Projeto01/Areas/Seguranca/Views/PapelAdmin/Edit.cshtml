@@ -1,0 +1,72 @@
+﻿@using Projeto01.Areas.Seguranca.Models
+@model PapelEditModel
+
+@{
+    ViewBag.Title = "Alteração de usuários em um PAPEL";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.ValidationSummary()
+@using (Html.BeginForm())
+{
+    <input type="hidden" name="nomePapel" value="@Model.Role.Name" />
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            Adicionar para @Model.Role.Name
+        </div>
+        <table class="table table-striped table-bordered">
+            @if (Model.NaoMembros.Count() == 0)
+            {
+                <tr>
+                    <td colspan="2">Todos os usuários são membros</td>
+                </tr>
+            }
+            else
+            {
+                <tr>
+                    <td>Usuários</td>
+                    <td>Adicionar ao Papel</td>
+                </tr>
+                foreach (var u in Model.NaoMembros)
+                {
+                    <tr>
+                        <td>@u.UserName</td>
+                        <td>
+                            <input type="checkbox" name="IdsParaAdicionar" value="@u.Id" />
+                        </td>
+                    </tr>
+                }
+            }
+        </table>
+    </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">Remover de @Model.Role.Name</div>
+        <table class="table table-striped table-bordered">
+            @if (Model.Membros.Count() == 0)
+            {
+                <tr>
+                    <td colspan="2">Sem usuários membros</td>
+                </tr>
+            }
+            else
+            {
+                <tr>
+                    <td>Usuários</td>
+                    <td>Remover do Papel</td>
+                </tr>
+                foreach (var u in Model.Membros)
+                {
+                    <tr>
+                        <td>@u.UserName</td>
+                        <td>
+                            <input type="checkbox" name="IdsParaRemover" value="@u.Id" />
+                        </td>
+                    </tr>
+                }
+            }
+        </table>
+    </div>
+    <button type="submit" class="btn btn-primary">Salvar</button>
+    @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
+}
+

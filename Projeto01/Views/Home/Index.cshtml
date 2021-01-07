@@ -4,4 +4,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
+@section ScriptPage {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#home").addClass("active");
+        })
+    </script>
+    }

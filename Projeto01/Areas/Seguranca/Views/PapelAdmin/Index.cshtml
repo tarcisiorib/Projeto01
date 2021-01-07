@@ -1,0 +1,68 @@
+﻿@using Projeto01.Infraestrutura
+@using Projeto01.Areas.Seguranca.Models
+@model IEnumerable<Papel>
+
+@{
+    ViewBag.Title = "Papéis";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        PAPÉIS
+    </div>
+    <table class="table table-striped table-bordered">
+        <tr>
+            <th>
+                Nome
+            </th>
+            <th>Usuários</th>
+            <th>Opções</th>
+        </tr>
+        @if (Model.Count() == 0)
+        {
+            <tr>
+                <td colspan="4" class="text-center">Sem papéis registrados</td>
+            </tr>
+        }
+        else
+        {
+            foreach (Papel role in Model)
+            {
+                <tr>
+                    <td>@role.Name</td>
+                    <td>
+                        @if (role.Users == null || role.Users.Count == 0)
+                        {
+                            @: Sem usuário no papel
+                            }
+                        else
+                        {
+                            <p>
+                                @string.Join(", ", role.Users.Select(x => Html.GetUserName(x.UserId)))
+                            </p>
+                        }
+                    </td>
+                    <td>
+                        @using (Html.BeginForm("Delete", "PapelAdmin", new { id = role.Id }))
+                        {
+                            @Html.ActionLink("Alterar", "Edit", new { id = role.Id }, new { @class = "btn btn-warning btn-xs" })
+                            <button class="btn btn-danger btn-xs" type="submit">Excluir</button>
+                        }
+                    </td>
+                </tr>
+            }
+        }
+
+    </table>
+</div>
+@Html.ActionLink("Adicionar", "Create", null, new { @class = "btn btn-info" })
+
+@section ScriptPage {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('li').removeClass("active");
+            $('#papeis').addClass('active');
+        });
+    </script>
+}

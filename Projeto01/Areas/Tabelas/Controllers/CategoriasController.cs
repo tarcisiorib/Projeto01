@@ -5,7 +5,7 @@ using System.Net;
 using System.Web.Mvc;
 using System;
 
-namespace Projeto01.Controllers
+namespace Projeto01.Areas.Tabelas.Controllers
 {
     public class CategoriasController : Controller
     {
