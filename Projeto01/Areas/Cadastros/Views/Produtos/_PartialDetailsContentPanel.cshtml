@@ -32,3 +32,16 @@
         @Html.EditorFor(model => model.Fabricante.Nome, new { htmlAttributes = new { @class = "form-control", disbled = "disabled" } })
     </div>
 </div>
+
+<div class="form-group">
+    @if (Model.Arquivo == null)
+    {
+        <div class="form-control-static">Nenhuma imagem adicionada</div>
+    }
+    else
+    {
+        <div class="panel-body">
+            <img class="img-thumbnail" src="@Url.Action("GetFile", "Produtos", new { id = Model.ProdutoId })" style="display:block;margin-left:auto;margin-right:auto;" />
+        </div>
+    }
+</div>

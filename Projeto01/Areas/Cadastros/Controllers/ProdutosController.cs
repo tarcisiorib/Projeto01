@@ -3,6 +3,9 @@ using Modelo.Cadastros;
 using System.Net;
 using System.Web.Mvc;
 using Servico.Tabelas;
+using System.Web;
+using System;
+using System.IO;
 
 namespace Projeto01.Areas.Cadastros.Controllers
 {
@@ -33,9 +36,9 @@ namespace Projeto01.Areas.Cadastros.Controllers
 
         // POST: Produtos/Create
         [HttpPost]
-        public ActionResult Create(Produto produto)
+        public ActionResult Create(Produto produto, HttpPostedFileBase file = null)
         {
-            return GravarProduto(produto);
+            return GravarProduto(produto, file, null);
         }
 
         // GET: Produtos/Edit/5
@@ -47,9 +50,9 @@ namespace Projeto01.Areas.Cadastros.Controllers
 
         // POST: Produtos/Edit/5
         [HttpPost]
-        public ActionResult Edit(Produto produto)
+        public ActionResult Edit(Produto produto, HttpPostedFileBase file = null, string chkRemover = null)
         {
-            return GravarProduto(produto);
+            return GravarProduto(produto, file, chkRemover);
         }
 
         // GET: Produtos/Delete/5
@@ -105,23 +108,58 @@ namespace Projeto01.Areas.Cadastros.Controllers
             }
         }
 
-        private ActionResult GravarProduto(Produto produto)
+        private ActionResult GravarProduto(Produto produto, HttpPostedFileBase file, string chkRemover)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
+                    if (chkRemover != null)
+                        produto.Arquivo = null;
+
+                    if (file != null)
+                    {
+                        produto.NomeArquivo = file.FileName;
+                        produto.TamanhoArquivo = file.ContentLength;
+                        produto.TipoArquivo = file.ContentType;
+                        produto.Arquivo = SetFileContent(file);
+                    }
                     produtoServico.GravarProduto(produto);
                     return RedirectToAction("Index");
                 }
-                PopularViewBag();
+                PopularViewBag(produto);
                 return View(produto);
             }
             catch
             {
-                PopularViewBag();
+                PopularViewBag(produto);
                 return View(produto);
             }
+        }
+
+        private byte[] SetFileContent(HttpPostedFileBase file)
+        {
+            var bytes = new byte[file.ContentLength];
+            file.InputStream.Read(bytes, 0, file.ContentLength);
+            return bytes;
+        }
+
+        public FileContentResult GetFile(long id)
+        {
+            Produto p = produtoServico.ObterProdutoPorId(id);
+            if (p != null)
+                return File(p.Arquivo, p.TipoArquivo);
+
+            return null;
+        }
+
+        public ActionResult Download(long id)
+        {
+            Produto p = produtoServico.ObterProdutoPorId(id);
+            FileStream fl = new FileStream(Server.MapPath($"~/TempData/{p.NomeArquivo}"), FileMode.Create, FileAccess.Write);
+            fl.Write(p.Arquivo, 0, Convert.ToInt32(p.TamanhoArquivo));
+            fl.Close();
+            return File(fl.Name, p.TipoArquivo, p.NomeArquivo);
         }
     }
 }
