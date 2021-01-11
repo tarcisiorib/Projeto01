@@ -12,6 +12,7 @@ namespace Modelo.Cadastros
         [StringLength(100, ErrorMessage = "O nome do produto precisa ter no mínimo 5 caracteres", MinimumLength = 5)]
         [Required(ErrorMessage = "Informe o nome do produto")]
         public string Nome { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         [DisplayName("Data de cadastro")]
         [Required(ErrorMessage = "Informe a data de cadastro do produto")]
         public DateTime? DataCadastro { get; set; }

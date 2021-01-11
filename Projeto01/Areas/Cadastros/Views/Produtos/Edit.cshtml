@@ -15,6 +15,8 @@
         </div>
         <div class="panel-body">
             @Html.HiddenFor(model => model.ProdutoId)
+            @Html.HiddenFor(model => model.Arquivo)
+            @Html.HiddenFor(model => model.TipoArquivo)
             @Html.Partial("~/Areas/Cadastros/Views/Produtos/_PartialEditContentPanel.cshtml", Model)
         </div>
         <div class="panel-footer panel-info">
@@ -30,12 +32,15 @@
 
 @section ScriptPage
 {
+    <script src="~/Scripts/jquery-ui-1.12.1/jquery-ui.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1/datepicker-pt-BR.js"></script>
     <script src="@Url.Content("~/Scripts/jquery.validate.js")"></script>
     <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.js")"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $('li').removeClass("active");
             $('#produtos').addClass("active");
+            $('#datepicker').datepicker();
         });
     </script>
 }
